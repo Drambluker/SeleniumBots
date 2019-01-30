@@ -45,7 +45,7 @@ class InstagramBot:
 
         # gathering photos
         pic_hrefs = []
-        for i in range(1, 2):
+        for i in range(1, 7):
             try:
                 driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
                 time.sleep(2)
@@ -78,3 +78,30 @@ class InstagramBot:
             except:
                 time.sleep(2)
             unique_photos -= 1
+
+
+def main():
+    username = input("Username: ")
+    password = input("Password: ")
+
+    bot = InstagramBot(username, password)
+    bot.login()
+
+    tags = ['amazing', 'beautiful', 'adventure', 'photography', 'nofilter', 'newyork', 'artsy', 'alumni', 'lion',
+            'best', 'fun', 'happy', 'art', 'funny', 'me', 'followme', 'follow', 'cinematography', 'cinema', 'love',
+            'instagood', 'instagood', 'followme', 'fashion', 'sun', 'scruffy', 'street', 'canon', 'beauty', 'studio',
+            'pretty', 'vintage', 'fierce']
+
+    try:
+        # Choose a random tag from the list of tags
+        tag = random.choice(tags)
+        bot.like_photo(tag)
+    except:
+        bot.__del__()
+        time.sleep(60)
+        bot = InstagramBot(username, password)
+        bot.login()
+
+
+if __name__ == "__main__":
+    main()
